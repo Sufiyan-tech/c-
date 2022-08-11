@@ -33,6 +33,7 @@ int main(){
     v2.arr[1] = 1.90;
     v2.arr[2] = 4.1;
 
+    cout << v2.arr[0] << endl;
     cout << v1.dotProduct(v2) << endl;
 
 
