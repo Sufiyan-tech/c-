@@ -48,9 +48,9 @@ int main(){
     // vec.insert(iter , 566);
     // vec.insert(iter+1 , 566);
     // vec.insert(iter-1 , 566);
+
     // vec.insert(iter , 10 , 566);
     // display(vec);
  
-
     return 0;
 }
