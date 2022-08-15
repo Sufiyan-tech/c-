@@ -1,0 +1,26 @@
+ int max = 0;
+        
+        
+         for(int i = 0 ; i  height.size() ; i++){
+             for(int j = 0; j  height.size() ; j++){
+                 int distance = i-j;
+                 int val = 0;
+                 if(distance  0){
+                     distance = distance  (-1);
+                 }
+                
+                 if(height[i]  height[j]){
+                     val = height[i]  distance;
+                 }else if(height[j]  height[i]){
+                     val = height[j]  distance;
+                 }else{
+                     val = height[i]  distance;
+                 }
+                
+                 if(val  max){
+                     max = val;
+                 }
+             }
+         }
+                
+         return max;
