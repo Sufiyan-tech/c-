@@ -1,4 +1,6 @@
- int max = 0;
+// Brute Force Approach 
+
+int max = 0;
         
         
          for(int i = 0 ; i  height.size() ; i++){
@@ -24,3 +26,37 @@
          }
                 
          return max;
+
+
+// Two Pointer Approach
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int left_index = 0;
+        int right_index = height.size()-1;
+        int vol = 0;
+        
+        while(left_index != right_index){
+            int distance = right_index - left_index;
+            if(distance < 0){
+                distance = distance * (-1);
+            }
+            
+            int current_vol = min(height[left_index] , height[right_index]) * distance;
+            
+            if(current_vol > vol){
+                vol = current_vol;
+            }
+            
+            if(height[left_index] < height[right_index]){
+                left_index++;
+            }else{
+                right_index--;
+            }
+            
+        }
+        
+        return vol;
+    }
+};
