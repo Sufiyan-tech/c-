@@ -1,0 +1,171 @@
+class Solution {
+public:
+    vector<char> strToVec(string & str){
+        vector<char> vec; 
+        for(int i = 0 ; i < str.length() ; i++){
+            vec.push_back(str[i]);
+        }
+        return vec;
+    }
+    
+    bool checkOnlySpecific(vector<char> & vec, char chr){
+        for(int i = 0 ; i < vec.size() ; i++){
+            if(vec[i] != chr){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool containAsterisk(vector<char> & string_p, int index , int direction){
+        if(direction == 1){
+            if(index == 0){
+                return false;
+            }else{
+                for(int i = 0 ; i < index ; i++){
+                    if(string_p[i] != '*'){
+                        return false;
+                    }
+                }
+            }
+        }else{
+            if((index+1) == string_p.size()){
+                return false;
+            }else{
+                for(int i = index+1 ; i < string_p.size() ; i++){
+                    if(string_p[i] != '*'){
+                        return false;
+                    }
+                }    
+            }
+            
+        }
+        return true;
+    }
+    
+    void removeElement(vector<char> & string_s , vector<char> & string_p , int index , int direction){
+        if(direction == 1){
+            string_s.erase(string_s.begin());
+            string_p.erase(string_p.begin() , string_p.begin()+(index+1));  
+        }else{
+            string_s.erase(string_s.begin()+(string_s.size()-1));
+            string_p.erase(string_p.begin()+(index) , string_p.end());
+        }
+    }
+    
+    
+    bool isMatch(string s, string p) {
+        vector<char> string_s = strToVec(s);
+        vector<char> string_p = strToVec(p);
+        
+        if(checkOnlySpecific(string_p , '*') == 1){
+            return true;
+        }else{
+            int left_index_s = 0;
+            int left_index_p = 0;
+            int right_index_s = string_s.size()-1;
+            int right_index_p = string_p.size()-1;
+          
+            while(true){
+                // For Left Pattern Start
+                for(int i = 0 ; i < string_p.size() ; i++){
+                    if(string_p[i] == '?'){
+                        if(containAsterisk(string_p , i , 1) == 1){
+                            removeElement(string_s , string_p , i , 1);
+                            break;
+                        }else{
+                            removeElement(string_s , string_p , i , 1);
+                            break;
+                        }
+                    }else if(string_p[i] >= 'a' && string_p[i] <= 'z'){
+                        
+                        if(string_s[left_index_s] == string_p[i]){
+                            if(containAsterisk(string_p , i , 1) == 1){
+                                removeElement(string_s , string_p , i , 1);
+                                break;
+                            }else{
+                                removeElement(string_s , string_p , i , 1);
+                                break;
+                            }   
+                        }else{
+                            if(containAsterisk(string_p , i , 1) == 1){
+                                removeElement(string_s , string_p , i-1 , 1);
+                                break;
+                            }else{
+                               
+                                return false;
+                            }
+                        } 
+                    }
+                }
+                
+                
+                // For Left Pattern End
+                
+                if(checkOnlySpecific(string_p , '*') == 1){
+                    return true;
+                }
+                
+                if(string_s.size() == 0 && string_p.size() == 0){
+                    return true;
+                }
+                
+                // For Right Pattern Start
+                for(int i = (string_p.size()-1) ; i > -1  ; i--){
+                    if(string_p[i] == '?'){
+                        if(containAsterisk(string_p , i , 2) == 1){
+                            removeElement(string_s , string_p , i , 1);
+                            break;
+                        }else{
+                            removeElement(string_s , string_p , i , 2);
+                            break;
+                        }
+                    }else if(string_p[i] >= 'a' && string_p[i] <= 'z'){
+                        if(string_s[string_s.size()-1] == string_p[i]){
+                            if(containAsterisk(string_p , i , 2) == 1){
+                                removeElement(string_s , string_p , i , 2);
+                                break;
+                            }else{
+                                removeElement(string_s , string_p , i , 2);
+                                break;
+                            }   
+                        }else{
+                            if(containAsterisk(string_p , i , 2) == 1){
+                                removeElement(string_s , string_p , i , 2);
+                                break;
+                            }else{
+                                return false;
+                            }
+                        }
+                    }
+                }
+                // For Right Pattern End
+            
+                if(checkOnlySpecific(string_p , '*') == 1){
+                    return true;
+                }
+                
+                if(string_s.size() == 0 && string_p.size() == 0){
+                    return true;
+                }
+                
+               break;
+                
+            }
+            
+            for(int i = 0 ; i < string_s.size() ; i++){
+                cout << string_s[i];
+            }
+            
+            cout << endl;
+            
+            for(int i = 0 ; i < string_p.size() ; i++){
+                cout << string_p[i];
+            }
+            
+                       
+        }
+        
+        return true;
+    }
+};
