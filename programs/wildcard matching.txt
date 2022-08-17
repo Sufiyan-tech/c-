@@ -131,7 +131,7 @@ public:
                             }   
                         }else{
                             if(containAsterisk(string_p , i , 2) == 1){
-                                removeElement(string_s , string_p , i , 2);
+                                removeElement(string_s , string_p , i+1 , 2);
                                 break;
                             }else{
                                 return false;
@@ -153,15 +153,7 @@ public:
                 
             }
             
-            for(int i = 0 ; i < string_s.size() ; i++){
-                cout << string_s[i];
-            }
-            
-            cout << endl;
-            
-            for(int i = 0 ; i < string_p.size() ; i++){
-                cout << string_p[i];
-            }
+           
             
                        
         }
