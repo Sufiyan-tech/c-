@@ -51,10 +51,10 @@ public:
     void removeElement(vector<char> & string_s , vector<char> & string_p , int index , int direction){
         if(direction == 1){
             string_s.erase(string_s.begin());
-            string_p.erase(string_p.begin() , string_p.begin()+(index+1));  
+            string_p.erase(string_p.begin()+(index));  
         }else{
             string_s.erase(string_s.begin()+(string_s.size()-1));
-            string_p.erase(string_p.begin()+(index) , string_p.end());
+            string_p.erase(string_p.begin()+(index));
         }
     }
     
@@ -168,6 +168,7 @@ public:
                 if(string_s.size() == 0 && string_p.size() > 0){
                     return false;
                 }
+             
                 
             }
             
