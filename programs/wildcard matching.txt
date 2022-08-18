@@ -9,11 +9,16 @@ public:
     }
     
     bool checkOnlySpecific(vector<char> & vec, char chr){
-        for(int i = 0 ; i < vec.size() ; i++){
-            if(vec[i] != chr){
-                return false;
-            }
+        if(vec.size() == 0){
+            return false;
+        }else{
+            for(int i = 0 ; i < vec.size() ; i++){
+                if(vec[i] != chr){
+                    return false;
+                }
+            }    
         }
+        
         return true;
     }
     
@@ -99,7 +104,6 @@ public:
                     }
                 }
                 
-                
                 // For Left Pattern End
                 
                 if(checkOnlySpecific(string_p , '*') == 1){
@@ -108,6 +112,14 @@ public:
                 
                 if(string_s.size() == 0 && string_p.size() == 0){
                     return true;
+                }
+                
+                if(string_s.size() > 0 && string_p.size() == 0){
+                    return false;
+                }
+                
+                if(string_s.size() == 0 && string_p.size() > 0){
+                    return false;
                 }
                 
                 // For Right Pattern Start
@@ -149,11 +161,16 @@ public:
                     return true;
                 }
                 
-               break;
+                if(string_s.size() > 0 && string_p.size() == 0){
+                    return false;
+                }
+                
+                if(string_s.size() == 0 && string_p.size() > 0){
+                    return false;
+                }
                 
             }
             
-           
             
                        
         }
