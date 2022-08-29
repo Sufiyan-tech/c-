@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.size() == 0 || prices.size() == 1){
+            return 0;
+        }
+        
+        int max_val = *max_element(prices.begin() , prices.end());
+        int max_ind = max_element(prices.begin() , prices.end())-prices.begin();
+        
+        if(max_ind == 0){
+            max_val = *max_element(prices.begin()+1 , prices.end());
+            max_ind = max_element(prices.begin()+1 , prices.end())-prices.begin();
+        }
+        
+        int min_val = *min_element(prices.begin() , prices.begin()+max_ind);
+        int pro = max_val-min_val;
+        if(pro <= 0){
+            pro = 0;
+        }
+        return pro;
+    }
+};
