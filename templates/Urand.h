@@ -14,7 +14,9 @@ class Urand{
     bitset<UpperBound> used;
 
     public:
-        Urand(){srand(time(0));}
+        Urand(){
+            srand(time(0));
+        }
 
         size_t operator()();
 };
@@ -26,12 +28,15 @@ inline size_t Urand<UpperBound>::operator()(){
     }
 
     size_t newval;
+
     while(used[newval = rand() % UpperBound]){
-        used[newval] = "D";
+        used[newval] = true;
     }
 
     return newval;
 }
 
 
-#endif 
+
+
+#endif

@@ -7,8 +7,7 @@ int main(){
     Urand<10> u;
 
     for(int i = 0 ; i < 20 ; ++i){
-        cout << u() << endl;
+        cout << u() << " ";
     }
-
-    return 0;    
+    return 0;
 }
