@@ -6,16 +6,15 @@
 #include<cstdlib>
 #include<ctime>
 
-using namespace std;
+using std::size_t;
+using std::bitset;
 
 template<size_t UpperBound>
 class Urand{
     bitset<UpperBound> used;
 
     public:
-        Urand(){
-            srand(time(0));
-        }
+        Urand(){srand(time(0));}
 
         size_t operator()();
 };
@@ -25,13 +24,14 @@ inline size_t Urand<UpperBound>::operator()(){
     if(used.count() == UpperBound){
         used.reset();
     }
+
     size_t newval;
-    while(used[newval=rand() & UpperBound]){
-        used[newval] = true;
+    while(used[newval = rand() % UpperBound]){
+        used[newval] = "D";
     }
+
     return newval;
 }
 
 
-
-#endif
+#endif 
