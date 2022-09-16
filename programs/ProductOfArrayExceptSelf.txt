@@ -5,30 +5,44 @@ public:
         if(index >= (nums.size())){
             return answers;
         }
-        
-        vector<int> prefix_product;
-        vector<int> suffix_product;
         int product;
+        int prefix_product = 1;
+        int suffix_product = 1;
         
         if(index == 0){
-            suffix_product.assign(nums.begin()+(index+1) , nums.end());
+            prefix_product = 1;
+            suffix_product = accumulate(nums.begin()+(index+1) , nums.end() , 1 , multiplies<int>());
         }
         else if(index == (nums.size()-1)){
-            prefix_product.assign(nums.rbegin()+1 , nums.rend());
+            prefix_product = accumulate(nums.rbegin()+1 , nums.rend() , 1 , multiplies<int>());
+            suffix_product = 1;
+        }else{
+            prefix_product = accumulate(nums.begin() , nums.end()-(nums.size()-index) , 1 , multiplies<int>());
+            suffix_product = accumulate(nums.begin()+(index+1) , nums.end(), 1 , multiplies<int>());
         }
+        int pro = prefix_product * suffix_product; 
         
-        answers.push_back(nums[index]);
+       
+        answers.push_back(pro);
         index++;
         recurseVectorCreation(nums , answers , index);
         return answers;
     }    
     
     vector<int> productExceptSelf(vector<int>& nums) {
+        int portion = nums.size() / 100;
         int index = 0;
         vector<int> answers;
-        for(int a : recurseVectorCreation(nums , answers , index)){
-            cout << a;
+        vector<int> v;
+
+        for(int i = 0 ; i < 100 ; i++){
+            // v.assign(nums.begin() , nums.begin()+portion);
+            // recurseVectorCreation(v , answers , index);
+            portion += 500; 
         }
+        
+        cout << nums.size() << endl;
+        cout << answers.size() << endl;
         return answers;
     }
 };
