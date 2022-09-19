@@ -5,9 +5,10 @@ public:
         if(index >= (nums.size())){
             return answers;
         }
+        
         int product;
-        int prefix_product = 1;
-        int suffix_product = 1;
+        int prefix_product;
+        int suffix_product;
         
         if(index == 0){
             prefix_product = 1;
@@ -20,9 +21,9 @@ public:
             prefix_product = accumulate(nums.begin() , nums.end()-(nums.size()-index) , 1 , multiplies<int>());
             suffix_product = accumulate(nums.begin()+(index+1) , nums.end(), 1 , multiplies<int>());
         }
+        
         int pro = prefix_product * suffix_product; 
         
-       
         answers.push_back(pro);
         index++;
         recurseVectorCreation(nums , answers , index);
@@ -30,18 +31,21 @@ public:
     }    
     
     vector<int> productExceptSelf(vector<int>& nums) {
-        int portion = nums.size() / 100;
         int index = 0;
+        int portion = nums.size()/1000;
+        int start_pos = 0; 
+        int end_pos = 1000;
         vector<int> answers;
-        vector<int> v;
-
-        for(int i = 0 ; i < 100 ; i++){
-            // v.assign(nums.begin() , nums.begin()+portion);
-            // recurseVectorCreation(v , answers , index);
-            portion += 500; 
+        vector<int> v_por;
+        for(int i = 0 ; i < portion ; i++){
+            cout << answers.size() << endl; 
+            // cout << start_pos << " " << end_pos << endl;
+            v_por.assign(nums.begin()+start_pos , nums.begin()+end_pos);
+            recurseVectorCreation(v_por , answers , index); 
+            start_pos = end_pos;
+            end_pos += 1000;
+            cout << answers.size() << endl;
         }
-        
-        cout << nums.size() << endl;
         cout << answers.size() << endl;
         return answers;
     }
