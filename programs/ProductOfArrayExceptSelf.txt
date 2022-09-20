@@ -1,11 +1,13 @@
 class Solution {
 public:
+   
+    vector<int> answers;
     
-    vector<int> recurseVectorCreation(vector<int>& nums , vector<int>& answers , int& index){
+    void recurseVectorCreation(vector<int> nums , int index){
         if(index >= (nums.size())){
-            return answers;
+            return;
         }
-        
+
         int product;
         int prefix_product;
         int suffix_product;
@@ -26,8 +28,8 @@ public:
         
         answers.push_back(pro);
         index++;
-        recurseVectorCreation(nums , answers , index);
-        return answers;
+        recurseVectorCreation(nums , index);
+        
     }    
     
     vector<int> productExceptSelf(vector<int>& nums) {
@@ -35,16 +37,13 @@ public:
         int portion = nums.size()/1000;
         int start_pos = 0; 
         int end_pos = 1000;
-        vector<int> answers;
+        
         vector<int> v_por;
         for(int i = 0 ; i < portion ; i++){
-            cout << answers.size() << endl; 
-            // cout << start_pos << " " << end_pos << endl;
             v_por.assign(nums.begin()+start_pos , nums.begin()+end_pos);
-            recurseVectorCreation(v_por , answers , index); 
+            recurseVectorCreation(v_por , index); 
             start_pos = end_pos;
             end_pos += 1000;
-            cout << answers.size() << endl;
         }
         cout << answers.size() << endl;
         return answers;
